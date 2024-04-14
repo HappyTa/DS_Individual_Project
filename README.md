@@ -38,7 +38,7 @@ The goal of this project is to use my knowledge acquired from this class and per
 
 ## Selection of Data
 
-The processing of the data are conducted using Jupyter Notebok and is available [here](code/VideoGameSales_Analysis.ipynb).
+The processing of the data are conducted using Jupyter Notebook and is available [here](code/VideoGameSales_Analysis.ipynb).
 
 The dataset selected contain sales data for video games from the year 1980 to 2020. The dataset have about 16,000 samples with 11 features:
 
@@ -76,7 +76,7 @@ With Rank having 100% uniqueness, I believe I will drop this as it might not pro
 
 ![Data description](/graph/data-describe.png)
 
-Using the output above, we can determine a few things, using `count`, we can find out if there is any data lost in those variables and by comparing the `mean` and median (`50%`) we can see determine the skewness of the data. Based on `count`, Year seems to be the only one with some minor data lost while the other are fine. Checking for right skewness, we can see that for all the sales columns (`NA_Sales`, `EU_Sales`, `JP_Sales`, `Other_Sales`, `Global_Sales`) the `mean` is **greater** than the median(`50%`), which mean the data is right skewed.
+Using the output above, we can determine a few things, using `count`, we can find out if there is any data lost in those variables, and by comparing the `mean` and median (`50%`) we can see determine the skewness of the data. Based on `count`, Year seems to be the only one with some minor data lost while the others are fine. Checking for right skewness, we can see that for all the sales columns (`NA_Sales`, `EU_Sales`, `JP_Sales`, `Other_Sales`, `Global_Sales`) the `mean` is **greater** than the median(`50%`), which mean the data is right skewed.
 
 ### Exploraty Data Analysis (EDA)
 
@@ -192,47 +192,47 @@ For this section, I will fecotrice the dataset and create a correlation heatmap 
 **Features**:
 
 * Imputing NaN with Modes:
-  * There are many ways to handle NaN in a dataset, while there are not many NaN in this dataset, `Year` and `publisher` still contain a small percantage of NaN which can be seen [here](#handling-nan). To resolve this, I chose to impute the NaN with Modes, the most common values in the column, which should not add too much statistical data to the dataset since there are only some NaN values.
-  * This was achive by using a loop through the columns with NaN (`Year`, `Publisher`), using Panda's [fillna](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.fillna.html) method and [mode](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html#pandas.DataFrame.mode) method, I then fill each NaN with the mode of that column.
+  * There are many ways to handle NaN in a dataset, while there are not many NaN in this dataset, `Year` and `publisher` still contain a small percentage of NaN which can be seen [here](#handling-nan). To resolve this, I chose to impute the NaN with Modes, the most common values in the column, which should not add too much statistical data to the dataset since there are only some NaN values.
+  * This was achieved by using a loop through the columns with NaN (`Year`, `Publisher`), using Panda's [fillna](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.fillna.html) method and [mode](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html#pandas.DataFrame.mode) method, I then fill each NaN with the mode of that column.
 * Handling Skewness:
-  * This process was relatively painless, I used Numpy's [log1p](https://numpy.org/doc/stable/reference/generated/numpy.log1p.html) function on the affected column and this was able to improve the skewness. The reason behind this is that Logarithmic transformation can help normalize positively skewed data, which it was, and help make it more symmetrical and easier to anaylize
+  * This process was relatively painless, I used Numpy's [log1p](https://numpy.org/doc/stable/reference/generated/numpy.log1p.html) function on the affected column and this was able to improve the skewness. The reason behind this is that Logarithmic transformation can help normalize positively skewed data, which it was, and help make it more symmetrical and easier to analyze
 * Correlation coefficient
-  * This method is use to measure the strength of a linear relationship between two variable. Its value can range from -1 to 1. The value can be interpetted in two parts
-    * Sign: if the value is negative, when one variable change, the other change in the opposite direction. If the value is possive, when one variable change, the other change in the same direction
-    * Absolute value: This indicate how much one variable will change if the other change.
-  * This method was used to determine the relationship of the columns with `Global_Sales` in order to answer question 1 and 2.
-  * To start, I had to factorize the dataset in order to get a meaningfull numeric value out of the categorical value, making the correlation possible, this was done using Panda's [apply](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply) method to apply a small lambda function, which use Panda's [factorize](https://pandas.pydata.org/docs/reference/api/pandas.factorize.html#pandas-factorize) function on each value of the dataset. Next I use Panda's [corr](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html#pandas.DataFrame.corr) function to create a correlation matrix of the dataset which is then graphed using seaborn's [heatmap](https://seaborn.pydata.org/generated/seaborn.heatmap.html#seaborn.heatmap)
+  * This method is used to measure the strength of a linear relationship between two variables. Its value can range from -1 to 1. The value can be interpreted in two parts
+    * Sign: if the value is negative, when one variable changes, the other changes in the opposite direction. If the value is positive, when one variable changes, the other changes in the same direction
+    * Absolute value: This indicates how much one variable will change if the other changes.
+  * This method was used to determine the relationship of the columns with `Global_Sales` to answer questions 1 and 2.
+  * To start, I had to factorize the dataset to get a meaningful numeric value out of the categorical value, making the correlation possible, this was done using Panda's [apply](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply) method to apply a small lambda function, which use Panda's [factorize](https://pandas.pydata.org/docs/reference/api/pandas.factorize.html#pandas-factorize) function on each value of the dataset. Next, I use Panda's [corr](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html#pandas.DataFrame.corr) function to create a correlation matrix of the dataset which is then graphed using seaborn's [heatmap](https://seaborn.pydata.org/generated/seaborn.heatmap.html#seaborn.heatmap)
 ## Results
 
 ### Question 1: Does a platform affect game sales?
 
-This question can be answer by looking at the [correlation graph](#correlation), We can see that there is a 0.1 correlation between `platform` and `Global_Sales`, meaning that as `platform` change in a direction, `Global_Sales` will also change in the same direction by 0.1 unit, comparing to other value, this is very low. As a result, I believe that a platform have very little effect on game sales.
+This question can be answered by looking at the [correlation graph](#correlation), We can see that there is a 0.1 correlation between `platform` and `Global_Sales`, meaning that as `platform` changes in a direction, `Global_Sales` will also change in the same direction by 0.1 unit, comparing to other value, this is very low. As a result, I believe that a platform has very little effect on game sales.
 
-### Question 2: Is there a corelation betwen game genre and game sales?
+### Question 2: Is there a correlation between game genre and game sales?
 
-Here game sales is interpreted as `Global_Sales`, This question can also be asnwered using the [correlation graph](#correlation). We can see that `genre` have a 0.08 correlation with `Global_Sales`. Meaning that as `genre` change in a direction, so those `Global_Sales` by 0.08 in the same direction which is not much. With this, I believe that Genre have very little effect on game sales
+Here game sales are interpreted as `Global_Sales`, This question can also be answered using the [correlation graph](#correlation). We can see that `genre` has a 0.08 correlation with `Global_Sales`. This means that as `genre` changes in a direction, so those `Global_Sales` by 0.08 in the same direction which is not much. With this, I believe that Genre has very little effect on game sales
 
 ### Question 3: Which year sold the most games?
 
-For this question, I found the answer by performing a [groupby](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) using `year` and then perform a [sum](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.groupby.DataFrameGroupBy.sum.html). This return the sum of all `Global_Sales` grouped by year. All that left is to find the year with the highest sales which can be seen below:
+For this question, I found the answer by performing a [groupby](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) using `year` and then performing a [sum](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.groupby.DataFrameGroupBy.sum.html). This return the sum of all `Global_Sales` grouped by year. All that is left is to find the year with the highest sales which can be seen below:
 
 ![code to find max sales and result](/graph/maxSales.png)
 
-As we can see, for this dataset, 2008 has the highest amount of video game sold.
+As we can see, for this dataset, 2008 has the highest amount of video games sold.
 
 ## Discussion
 
-After finding a result, I feel like it was a little weird how there is not that much correlation between Platform and Game Sales. From personal experience, I have always notice that games on console-like devices (Playstation, XBox, and Nintendo Switch, etc.), being more accessable than PC Games, there should be more games sold on those platform. Having said that, the dataset proved me wrong.
+After finding a result, I feel like it was a little weird how there is not that much correlation between Platform and Game Sales. From personal experience, I have always noticed that games on console-like devices (PlayStation, Xbox, and Nintendo Switch, etc.), are more accessible than PC Games, there should be more games sold on those platforms. Having said that, the dataset proved me wrong.
 
-Some complication that I notice, while working on the [EDA](#exploraty-data-analysis-eda) section, many of my graphs came out looking horrible. An example would be the graph of [`publisher` vs `Global_Sales`](#publisher). Since columns like `publisher` and `name` inherently contain a lot of unique values, it might have been too much for `seaborn` and `matplotlib` to fit all of them on the x-axis. I would like to spend more time outside of the project trying to fix this problem.
+Some complications that I noticed, while working on the [EDA](#exploraty-data-analysis-eda) section, many of my graphs came out looking horrible. An example would be the graph of [`publisher` vs `Global_Sales`](#publisher). Since columns like `publisher` and `name` inherently contain a lot of unique values, it might have been too much for `seaborn` and `matplotlib` to fit all of them on the x-axis. I would like to spend more time outside of the project trying to fix this problem.
 
 ## Summary
 
-The purpose of this project is to take a look at videogame sales globaly from the year 1980 to 2025 and find the asnwer to three main questions listed [here](#selection-of-data). The dataset had some problems like right skewness and missing data which was handled using method listed in [this](#feature-engineering). After experimenting, the answers for the question was found and they are as follow:
+The purpose of this project is to take a look at video game sales globally from the year 1980 to 2025 and find the answers to three main questions listed [here](#selection-of-data). The dataset had some problems like right skewness and missing data which was handled using the method listed in [this](#feature-engineering). After experimenting, the answers to the question were found and they are as follows:
 
-1. Platform have very little effect on game sales.
-2. There are some corelation between genre and game sales but not enough for any statistical purposes.
-3. The year 2008 has the highest sale in games.
+1. Platforms have very little effect on game sales.
+2. There is some correlation between genre and game sales but not enough for any statistical purposes.
+3. The year 2008 has the highest sales in games.
 
 ## References
 
