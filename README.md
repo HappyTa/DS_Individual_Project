@@ -31,13 +31,13 @@
 
 ## Introduction
 
-The goal of this project is to use my knowledge acquired from this class and perform some simple data analysis on a dataset about video game sales. The reason I chose a video game sales dataset is that I love to play video games and have an interest in game development. I wanted to use this project as an excuse to do some investigation on game development, finding out what makes or breaks a game.
+The goal of this project is to use my knowledge acquired from this class and perform some simple data analysis on a dataset about video game sales. The reason I chose a video game sales dataset is that I love to play video games and have an interest in game development. I wanted to use this project to educate myself on game development and learn what it takes to develope a successful game.
 
 ## Selection of Data
 
-The processing of the data are conducted using Jupyter Notebook and is available [here](code/VideoGameSales_Analysis.ipynb).
+The processing of this data is conducted using Jupyter Notebook and is available [here](code/VideoGameSales_Analysis.ipynb).
 
-The dataset selected contain sales data for video games from the year 1980 to 2020. The dataset have about 16,000 samples with 11 features:
+The dataset selected contains sales data for video games from the year 1980 to 2020. The dataset has roughly 16,000 samples with 11 features:
 
 * Rank
 * Name
@@ -51,9 +51,9 @@ The dataset selected contain sales data for video games from the year 1980 to 20
 * Other_Sales
 * Global_Sales
 
-The objective of this project is to answers these 3 question:
+The objective of this project is to answer these 3 questions:
 1. Does a platform affect game sales?
-2. Which column affect sales the most?
+2. Which column in my data set has the biggest affect on global sales?
 3. Which year has the highest amount of game sales?
 
 The dataset can be found at [kaggle](https://www.kaggle.com/datasets/gregorut/videogamesales) [1].
@@ -63,21 +63,21 @@ The dataset can be found at [kaggle](https://www.kaggle.com/datasets/gregorut/vi
 
 ![data type screenshot](/graph/data-type.png)
 
-Looking at the image above , we can see that there are 4 categorical variables (variables with `'O'` for their datatype): `Name`, `Platform`, `Genre`. I used pandas's [factorize](https://pandas.pydata.org/docs/reference/api/pandas.factorize.html) function to get a numerical value for these variable. We can also see that `Rank` and `Name` have a high number of unique values, the percentage can be observe below:
+Looking at the image above , we can see that there are 4 categorical variables (variables with `'O'` for their datatype): `Name`, `Platform`, `Genre`. I used pandas's [factorize](https://pandas.pydata.org/docs/reference/api/pandas.factorize.html) function to get a numerical value for these variables. We can also see that `Rank` and `Name` have a high number of unique values. This percentage can be observed below:
 
 ![percentage of unique values for column Rank and Name](/graph/name-rank-unique.png)
 
-With Rank having 100% uniqueness, I believe I will drop this as it might not prove useful to the project.
+With Rank having 100% uniqueness, I believe that dropping the rank column will be beneficial to the project because it does not provide enough statistical value to answer the three questions above.
 
 ### Data description:
 
 ![Data description](/graph/data-describe.png)
 
-Using the output above, we can determine a few things, using `count`, we can find out if there is any data lost in those variables, and by comparing the `mean` and median (`50%`) we can see determine the skewness of the data. Based on `count`, Year seems to be the only one with some minor data lost while the others are fine. Checking for right skewness, we can see that for all the sales columns (`NA_Sales`, `EU_Sales`, `JP_Sales`, `Other_Sales`, `Global_Sales`) the `mean` is **greater** than the median(`50%`), which mean the data is right skewed.
+Using the output above, we can determine if the dataset is right skewed and if there are any datalost. First, with `Count`, if the number of count is less than 16598, then that means there are data lost which only `Year` seems to suffer from. Next, we can determind right skewness using `mean` and median (`50%`). If `mean` is greater than `median` it means those columns are right skewed which the sales columns seems to suffer from.
 
 ### Exploraty Data Analysis (EDA)
 
-Here I will take a closer look at the data set to find any pattern that exist in the dataset. First, I will split the columnns into two types, `numerical` and `categorical` variables.
+Here I will take a closer look at the data set to find any pattern that exists in the dataset. First, I will split the columnns into two types, `numerical` and `categorical` variables.
 
 Here is the list of columns split into those types:
 ![list of numerical and categorical variables](/graph/num-cat-var-list.png)
@@ -117,13 +117,13 @@ Ealier, in [data describtion](#data-description), I theorize that there are some
 
 #### Categorical Variable EDA
 
-For this section, I will use barplot and countplots. The barplot will be use to represents a statistical estimate for a variable with the height of each recatangle and indicates the uncertanty around that estimate using an error bar. A count plot is similar to a histogram but across a categorical instead of quantitative variable, it show the counts of observation in each categorical bin using bars.
+For this section, I will use barplot and countplots. The barplot will be used to represents a statistical estimate for a variable with the height of each recatangle and indicates the **uncertanty** around that estimates an error bar. A count plot is similar to a histogram but across a categorical instead of quantitative variable, it shows the counts of observation in each categorical bin using bars.
 
 ##### Platform
 
 ![Barplot for Platform](/graph/platformEDA.png)
 
-Here I wanted to see if there were any genre that sold better on different platform
+Here I wanted to see if there were any genres that sold better on different platforms.
 
 ![Barplot for Platform, seprated by Genre](/graph/platform-genreEDA.png)
 
@@ -137,17 +137,17 @@ We can see that some genres are more popular in certain platforms, for examples:
 
 ![Barplot for Publisher](/graph/publisherEDA.png)
 
-This plot here is a bit harder to look at because of the number of unique publisher and the scale which `seaplot` would allow me to plot.
+This plot here is a bit harder to look at because of the number of unique publishers and the scale which `seaplot` would allow me to plot.
 
 #### Feature Engineering
 
-Here I will be perform a few operation to make the dataset easier to use and expose patterns in the dataset.
+Here I will perform a few operations to make the dataset easier to use and expose patterns in the dataset.
 
 ##### Handling NaN
 
 ![A picture showing the percantage of NaN in each column](/graph/NaNPercent.png)
 
-Looking at the graph above, `Year` and `Publisher` have a small amount of Not a Number(NaN) values. I will try to eliminate this by imputing the NaN with the most common value (Modes). Since the percentage of NaN is very small, I do not belive this will have large affect on the statistical data.
+Looking at the graph above, `Year` and `Publisher` have a small amount of Not a Number(NaN) values. I will try to eliminate this by imputing the NaN with the most common value (Modes). Since the percentage of NaN is very small, I do not belive this will have a large affect on the statistical data.
 
 ![Code of imputing NaN with modes](/graph/NaN-mode.png)
 
@@ -167,13 +167,13 @@ Comparing the before and after graph, we can see that the sales columns are a lo
 
 ##### Removing Rank
 
-I believe that rank does not provide much statistical data since it server as a weird index. As a result, I will be removing it.
+I believe that rank does not provide much statistical data since it servers as a weird index. As a result, I will be removing it.
 
 ![Code for removing rank](/graph/removeRank.png)
 
 ##### Correlation
 
-For this section, I will fecotrice the dataset and create a correlation heatmap to find correlation between each column in the dataset.
+For this section, I will factorize the dataset and create a correlation heatmap to find correlation between each column in the dataset.
 
 ![correlation graph](/graph/correlation.png)
 
@@ -192,9 +192,9 @@ For this section, I will fecotrice the dataset and create a correlation heatmap 
   * There are many ways to handle NaN in a dataset, while there are not many NaN in this dataset, `Year` and `publisher` still contain a small percentage of NaN which can be seen [here](#handling-nan). To resolve this, I chose to impute the NaN with Modes, the most common values in the column, which should not add too much statistical data to the dataset since there are only some NaN values.
   * This was achieved by using a loop through the columns with NaN (`Year`, `Publisher`), using Panda's [fillna](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.fillna.html) method and [mode](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html#pandas.DataFrame.mode) method, I then fill each NaN with the mode of that column.
 * Handling Skewness:
-  * This process was relatively painless, I used Numpy's [log1p](https://numpy.org/doc/stable/reference/generated/numpy.log1p.html) function on the affected column and this was able to improve the skewness. The reason behind this is that Logarithmic transformation can help normalize positively skewed data, which it was, and help make it more symmetrical and easier to analyze
-* Correlation coefficient
-  * This method is used to measure the strength of a linear relationship between two variables. Its value can range from -1 to 1. The value can be interpreted in two parts
+  * I used Numpy's [log1p](https://numpy.org/doc/stable/reference/generated/numpy.log1p.html) function on the affected column and this was able to improve the skewness. The reason behind this is that Logarithmic transformation can help normalize positively skewed data, which it was, and help make it more symmetrical and easier to analyze.
+* Correlation coefficient:
+  * This method is used to measure the strength of a linear relationship between two variables. Its value can range from -1 to 1. The value can be interpreted in two parts:
     * Sign: if the value is negative, when one variable changes, the other changes in the opposite direction. If the value is positive, when one variable changes, the other changes in the same direction
     * Absolute value: This indicates how much one variable will change if the other changes.
   * This method was used to determine the relationship of the columns with `Global_Sales` to answer questions 1 and 2.
@@ -225,7 +225,7 @@ Some complications that I noticed, while working on the [EDA](#exploraty-data-an
 
 ## Summary
 
-The purpose of this project is to take a look at video game sales globally from the year 1980 to 2025 and find the answers to three main questions listed [here](#selection-of-data). The dataset had some problems like right skewness and missing data which was handled using the method listed in [this](#feature-engineering). After experimenting, the answers to the question were found and they are as follows:
+The purpose of this project is to take a look at video game sales globally from the year 1980 to 2020 and find the answers to three main questions listed [here](#selection-of-data). The dataset had some problems like right skewness and missing data which was handled using the method listed in [this](#feature-engineering). After experimenting, the answers to the question were found and they are as follows:
 
 1. Platforms have very little effect on game sales.
 2. There is some correlation between genre and game sales but not enough for any statistical purposes.
