@@ -39,17 +39,17 @@ The processing of this data is conducted using Jupyter Notebook and is available
 
 The dataset selected contains sales data for video games from the year 1980 to 2020. The dataset has roughly 16,000 samples with 11 features:
 
-* Rank
-* Name
-* Platform
-* Year
-* Genre
-* Publisher
-* NA_Sales
-* EU_Sales
-* JP_Sales
-* Other_Sales
-* Global_Sales
+* Rank: A rating for the video game, it goes from 1 (highest) to 16600.
+* Name: The name of the video game.
+* Platform: A computer system that the game was made for.
+* Year: The year the game was released.
+* Genre: A specific category that the game share similar characteristics with, i.e., Horror, Adventure, Comedy.
+* Publisher: The entity that sponser the video game's developer.
+* NA_Sales: The ammount of money this game made in North America (in millions).
+* EU_Sales: The ammount of money this game made in Europian Union (in millions).
+* JP_Sales: The ammount of money this game made in Japan (in millions).
+* Other_Sales: The ammount of money this game made from other regions of the world (in millions).
+* Global_Sales:  The ammount of money this game made Globally (in millions).
 
 The objective of this project is to answer these 3 questions:
 1. Does a platform affect game sales?
